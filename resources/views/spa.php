@@ -21,6 +21,10 @@
 <script src="/vue.js"></script>
 <script src="/vue-router.js"></script>
 <script src="/vue-resource.js"></script>
+
+<script src="/Component/RequestToken.js"></script>
+<script src="/Component/EnterToken.js"></script>
+
 <script src="/script.js"></script>
 </body>
 
