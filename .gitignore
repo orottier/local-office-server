@@ -1,4 +1,5 @@
 /vendor
 /public/vue.js
 /public/vue-router.js
+/public/vue-resource.js
 .env

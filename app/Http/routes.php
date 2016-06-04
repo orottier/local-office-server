@@ -11,6 +11,15 @@
 |
 */
 
+use Illuminate\Http\Request;
+
 $app->get('/', function () use ($app) {
     return view('spa');
+});
+
+$app->post('/api/request-token', function (Request $request) use ($app) {
+    return [
+        'username' => $request->input('username'),
+        'status' => 'success',
+    ];
 });

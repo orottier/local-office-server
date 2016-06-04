@@ -14,17 +14,13 @@
 <div id='app'>
     <h1>Welcome to the office!</h1>
 
-    <div>
-    <a v-link="{ path: '/' }">Go to Login</a>
-    <a v-link="{ path: '/bar' }">Go to Bar</a>
-    </div>
-
     <!-- route outlet -->
     <router-view></router-view>
 </div>
 
 <script src="/vue.js"></script>
 <script src="/vue-router.js"></script>
+<script src="/vue-resource.js"></script>
 <script src="/script.js"></script>
 </body>
 
