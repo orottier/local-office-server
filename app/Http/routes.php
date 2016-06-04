@@ -19,6 +19,18 @@ $app->get('/', function () use ($app) {
     return view('spa');
 });
 
+$app->get('/api/status', function (Request $request) use ($app) {
+    $auth = $request->header('X-Authorization');
+    $loggedIn = false;
+    if ($auth && strpos($auth, 'Bearer ') === 0) {
+        $loggedIn = Crypt::decrypt(substr($auth, 7));
+    }
+    return [
+        'status' => 'amazeballs',
+        'loggedIn' => $loggedIn,
+    ];
+});
+
 $app->post('/api/request-token', function (Request $request) use ($app) {
     $username = $request->input('username');
     $token = Crypt::encrypt($username);

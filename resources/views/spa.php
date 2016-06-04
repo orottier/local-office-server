@@ -24,6 +24,7 @@
 
 <script src="/Component/RequestToken.js"></script>
 <script src="/Component/EnterToken.js"></script>
+<script src="/Component/Dashboard.js"></script>
 
 <script src="/script.js"></script>
 </body>

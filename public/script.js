@@ -13,6 +13,9 @@ router.map({
     },
     '/enter': {
         component: EnterToken
+    },
+    '/dashboard': {
+        component: Dashboard
     }
 })
 

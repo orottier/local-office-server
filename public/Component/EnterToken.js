@@ -15,8 +15,19 @@ var EnterToken = Vue.extend({
     methods: {
         enterToken: function() {
             if (this.appState.token) {
-                Vue.http.headers.common['Authorization'] = 'Bearer ' + this.appState.token;
-                this.errorMsg = 'Authorization has been set';
+                Vue.http.headers.common['X-Authorization'] = 'Bearer ' + this.appState.token;
+                this.errorMsg = 'Authorization has been set, checking...';
+                this.$http.get('/api/status')
+                    .then(
+                        function(result) {
+                            if (result.data.loggedIn && result.data.loggedIn === this.appState.username) {
+                                router.go('/dashboard');
+                            } else {
+                                this.errorMsg = 'Could not verify this token!';
+                                document.getElementById('tokenInput').focus();
+                            }
+                        }
+                    );
             } else {
                 document.getElementById('tokenInput').focus();
             }
