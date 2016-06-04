@@ -12,14 +12,19 @@
 */
 
 use Illuminate\Http\Request;
+use App\Jobs\SendSlackMessage;
+use Illuminate\Support\Facades\Crypt;
 
 $app->get('/', function () use ($app) {
     return view('spa');
 });
 
 $app->post('/api/request-token', function (Request $request) use ($app) {
+    $username = $request->input('username');
+    $token = Crypt::encrypt($username);
+    $success = dispatch(new SendSlackMessage('@' . $username, 'here is your token: `' . $token . '`'));
     return [
-        'username' => $request->input('username'),
-        'status' => 'success',
+        'username' => $username,
+        'status' => $success ? 'success' : 'error',
     ];
 });

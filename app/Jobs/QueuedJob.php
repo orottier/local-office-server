@@ -2,7 +2,12 @@
 
 namespace App\Jobs;
 
-abstract class Job
+use Illuminate\Bus\Queueable;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Contracts\Queue\ShouldQueue;
+
+abstract class QueuedJob implements ShouldQueue
 {
     /*
     |--------------------------------------------------------------------------
@@ -15,5 +20,5 @@ abstract class Job
     |
     */
 
-    abstract public function handle();
+    use InteractsWithQueue, Queueable, SerializesModels;
 }
