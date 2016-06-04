@@ -3,3 +3,4 @@
 /public/vue-router.js
 /public/vue-resource.js
 .env
+/database/database.sqlite
