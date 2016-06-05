@@ -1,6 +1,7 @@
 var appState = {
     username: '',
-    token: ''
+    token: '',
+    loggedIn: false,
 }
 
 var App = Vue.extend({});
@@ -15,7 +16,22 @@ router.map({
         component: EnterToken
     },
     '/dashboard': {
-        component: Dashboard
+        component: Dashboard,
+        auth: true
+    }
+})
+
+router.beforeEach(function (transition) {
+    if (transition.to.auth) {
+        if (!appState.loggedIn) {
+            transition.abort();
+        }
+        transition.next();
+    } else {
+        if (appState.loggedIn) {
+            transition.abort();
+        }
+        transition.next();
     }
 })
 

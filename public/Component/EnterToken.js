@@ -25,6 +25,7 @@ var EnterToken = Vue.extend({
                     .then(
                         function(result) {
                             if (result.data.loggedIn && result.data.loggedIn === this.appState.username) {
+                                this.appState.loggedIn = true;
                                 router.go('/dashboard');
                             } else {
                                 this.working = false;
