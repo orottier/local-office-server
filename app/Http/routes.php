@@ -19,8 +19,8 @@ $app->get('/', function () {
     return view('spa');
 });
 
-$app->get('/api/users', function () use ($app) {
-    return User::all();
+$app->get('/api/users', function () {
+    return User::with('macAddresses')->get();
 });
 
 $app->get('/api/status', function (Request $request) {
@@ -50,4 +50,15 @@ $app->post('/api/request-token', function (Request $request) {
         'username' => $username,
         'status' => $success ? 'success' : 'error',
     ];
+});
+
+$app->group([
+    'prefix' => 'api',
+    'middleware' => 'auth',
+], function () use ($app) {
+
+    $app->get('/me', function () {
+        return Auth::with('macAddresses')->get();
+    });
+
 });

@@ -29,4 +29,9 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $hidden = [
         'token',
     ];
+
+    public function macAddresses()
+    {
+        return $this->hasMany(MacAddress::class);
+    }
 }
