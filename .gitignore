@@ -4,3 +4,4 @@
 /public/vue-resource.js
 .env
 /database/database.sqlite
+/storage/*

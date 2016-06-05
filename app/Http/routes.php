@@ -13,6 +13,7 @@
 
 use Illuminate\Http\Request;
 use App\Jobs\SendSlackMessage;
+use App\Jobs\WriteMacAddresses;
 use App\User;
 use App\MacAddress;
 
@@ -20,10 +21,20 @@ $app->get('/', function () {
     return view('spa');
 });
 
-// TODO remove debug route
+
+/*
+ * TODO remove debug routes
+ ****************************************************************/
 $app->get('/api/users', function () {
     return User::with('macAddresses')->get();
 });
+$app->get('/api/flush', function () {
+    dispatch(new WriteMacAddresses(storage_path('users.list')));
+});
+/*****************************************************************
+ * TODO remove debug routes
+ */
+
 
 $app->get('/api/status', function (Request $request) {
     $loggedIn = false;
@@ -82,6 +93,9 @@ $app->group([
         foreach($add as $mac) {
             $user->macAddresses()->save(new MacAddress(['mac_address' => $mac]));
         }
+
+        dispatch(new WriteMacAddresses(storage_path('users.list')));
+
         return [
             'add' => $add,
             'delete' => $delete,
