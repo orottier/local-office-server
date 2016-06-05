@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 use App\Jobs\SendSlackMessage;
 use App\User;
 
-$app->get('/', function () use ($app) {
+$app->get('/', function () {
     return view('spa');
 });
 
@@ -23,15 +23,11 @@ $app->get('/api/users', function () use ($app) {
     return User::all();
 });
 
-$app->get('/api/status', function (Request $request) use ($app) {
-    $auth = $request->header('X-Authorization');
+$app->get('/api/status', function (Request $request) {
     $loggedIn = false;
-    if ($auth && strpos($auth, 'Bearer ') === 0) {
-        $token = substr($auth, 7);
-        $user = User::where('token', $token)->first();
-        if ($user) {
-            $loggedIn = $user->username;
-        }
+    $user = Auth::user();
+    if ($user) {
+        $loggedIn = $user->username;
     }
     return [
         'status' => 'amazeballs',
@@ -39,7 +35,7 @@ $app->get('/api/status', function (Request $request) use ($app) {
     ];
 });
 
-$app->post('/api/request-token', function (Request $request) use ($app) {
+$app->post('/api/request-token', function (Request $request) {
     $username = $request->input('username');
     $token = substr(md5(rand()), 0, 12);
 
