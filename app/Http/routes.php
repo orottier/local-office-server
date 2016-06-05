@@ -14,11 +14,13 @@
 use Illuminate\Http\Request;
 use App\Jobs\SendSlackMessage;
 use App\User;
+use App\MacAddress;
 
 $app->get('/', function () {
     return view('spa');
 });
 
+// TODO remove debug route
 $app->get('/api/users', function () {
     return User::with('macAddresses')->get();
 });
@@ -58,7 +60,32 @@ $app->group([
 ], function () use ($app) {
 
     $app->get('/me', function () {
-        return Auth::with('macAddresses')->get();
+        $user = Auth::user();
+        $return = $user->toArray();
+        $return['mac_addresses'] = $user->macAddresses->pluck('mac_address');
+        return $return;
+    });
+
+    // TODO needs more REST
+    $app->post('/me/addresses', function (Request $request) {
+        $addresses = collect($request->input('addresses'));
+        $user = Auth::user();
+        $delete = $user->macAddresses->filter(function ($item) use ($addresses) {
+            return !in_array($item->mac_address, $addresses->all());
+        });
+        $add = $addresses->filter(function ($item) use ($user) {
+            return !in_array($item, $user->macAddresses->pluck('mac_address')->all());
+        });
+        foreach($delete as $mac) {
+            $mac->delete();
+        }
+        foreach($add as $mac) {
+            $user->macAddresses()->save(new MacAddress(['mac_address' => $mac]));
+        }
+        return [
+            'add' => $add,
+            'delete' => $delete,
+        ];
     });
 
 });
