@@ -5,16 +5,18 @@ var Dashboard = Vue.extend({
             'userData': {}
         };
     },
-    template: `<p>Dashboard &ndash; {{ appState.username }}</p>
-        <p>Your MAC addresses for identification:</p>
-        Add new: <input v-model="newMacAddress" v-on:keyup.enter="addMacAddress">
-        <ul>
-            <li v-for="mac in userData.mac_addresses">
-                <span>{{ mac }}</span>
-                <button v-on:click="removeAddress($index)">X</button>
-            </li>
-        </ul>
-        `,
+    template: `
+        <div>
+            <p>Dashboard &ndash; {{ appState.username }}</p>
+            <p>Your MAC addresses for identification:</p>
+            Add new: <input v-model="newMacAddress" v-on:keyup.enter="addMacAddress">
+            <ul>
+                <li v-for="mac in userData.mac_addresses">
+                    <span>{{ mac }}</span>
+                    <button v-on:click="removeAddress($index)">X</button>
+                </li>
+            </ul>
+        </div>`,
     methods: {
         addMacAddress: function () {
             var text = this.newMacAddress.trim();

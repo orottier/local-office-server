@@ -15,7 +15,8 @@
     <h1>Welcome to the office!</h1>
 
     <!-- route outlet -->
-    <router-view></router-view>
+    <router-view transition="expand" transition-mode="out-in">
+    </router-view>
 </div>
 
 <script src="/vue.js"></script>

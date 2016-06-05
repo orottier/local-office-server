@@ -7,13 +7,16 @@ var EnterToken = Vue.extend({
             'working': false,
         };
     },
-    template: `<p>An access token has been sent to @{{ appState.username }} on Slack, please enter it here:</p>
-        <form v-on:submit.prevent="enterToken">
-            <p v-if="errorMsg">{{ errorMsg }}</p>
-            <input id='tokenInput' v-model="appState.token">
-            <button action='submit' :disabled="working">{{ cta }}</button>
-        </form>
-        <a v-link="{ path: '/' }">Try again</a>`,
+    template: `
+        <div>
+            <p>An access token has been sent to @{{ appState.username }} on Slack, please enter it here:</p>
+            <form v-on:submit.prevent="enterToken">
+                <p v-if="errorMsg">{{ errorMsg }}</p>
+                <input id='tokenInput' v-model="appState.token">
+                <button action='submit' :disabled="working">{{ cta }}</button>
+            </form>
+            <a v-link="{ path: '/' }">Try again</a>
+        </div>`,
     methods: {
         enterToken: function() {
             if (this.appState.token) {

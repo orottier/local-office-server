@@ -7,12 +7,15 @@ var RequestToken = Vue.extend({
             'working': false
         };
     },
-    template: `<p>Leave your Slack username to get access</p>
-        <form v-on:submit.prevent="requestToken">
-            <p v-if="errorMsg">{{ errorMsg }}</p>
-            <input id='loginInput' v-model="appState.username">
-            <button action='submit' :disabled="working">{{ cta }}</button>
-        </form>`,
+    template: `
+        <div>
+            <p>Leave your Slack username to get access</p>
+            <form v-on:submit.prevent="requestToken">
+                <p v-if="errorMsg">{{ errorMsg }}</p>
+                <input id='loginInput' v-model="appState.username">
+                <button action='submit' :disabled="working">{{ cta }}</button>
+            </form>
+        </div>`,
     methods: {
         requestToken: function() {
             if (this.appState.username) {

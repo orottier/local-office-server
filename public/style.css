@@ -32,3 +32,10 @@ h1,h2,h3,h4,h5,h6 {
 
     background: white;
 }
+
+.expand-transition {
+    transition: opacity 0.1s ease;
+}
+.expand-enter, .expand-leave {
+    opacity: 0;
+}
