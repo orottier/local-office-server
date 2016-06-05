@@ -31,6 +31,9 @@ $app->get('/api/users', function () {
 $app->get('/api/flush', function () {
     dispatch(new WriteMacAddresses(storage_path('users.list')));
 });
+$app->get('/api/jobs', function () {
+    return DB::table('jobs')->get();
+});
 /*****************************************************************
  * TODO remove debug routes
  */
