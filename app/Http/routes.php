@@ -73,36 +73,42 @@ $app->group([
     'middleware' => 'auth',
 ], function () use ($app) {
 
-    $app->get('/me', function () {
-        $user = Auth::user();
-        $return = $user->toArray();
-        $return['mac_addresses'] = $user->macAddresses->pluck('mac_address');
-        return $return;
+    $app->get('/users/{id}', function ($id) {
+        if ($id === 'me') {
+            $user = Auth::user();
+        } else {
+            $user = User::findOrFail($id);
+            $this->authorize('view', $user);
+        }
+        return $user;
     });
 
-    // TODO needs more REST
-    $app->post('/me/addresses', function (Request $request) {
-        $addresses = collect($request->input('addresses'));
-        $user = Auth::user();
-        $delete = $user->macAddresses->filter(function ($item) use ($addresses) {
-            return !in_array($item->mac_address, $addresses->all());
-        });
-        $add = $addresses->filter(function ($item) use ($user) {
-            return !in_array($item, $user->macAddresses->pluck('mac_address')->all());
-        });
-        foreach($delete as $mac) {
-            $mac->delete();
+    $app->get('/users/{id}/mac-addresses', function ($id) {
+        if ($id === 'me') {
+            $user = Auth::user();
+        } else {
+            $user = User::findOrFail($id);
+            $this->authorize('view', $user);
         }
-        foreach($add as $mac) {
-            $user->macAddresses()->save(new MacAddress(['mac_address' => $mac]));
+        return $user->macAddresses;
+    });
+    $app->post('/users/{id}/mac-addresses', function ($id, Request $request) {
+        if ($id === 'me') {
+            $user = Auth::user();
+        } else {
+            $user = User::findOrFail($id);
+            $this->authorize('view', $user);
         }
-
-        dispatch(new WriteMacAddresses(storage_path('users.list')));
-
-        return [
-            'add' => $add,
-            'delete' => $delete,
-        ];
+        $address = new MacAddress(['mac_address' => $request->input('address')]);
+        $this->authorize('create', $address);
+        $user->macAddresses()->save($address);
+        return $address;
+    });
+    $app->delete('/mac-addresses/{id}', function ($id) {
+        $address = MacAddress::findOrFail($id);
+        $this->authorize('delete', $address);
+        $address->delete();
+        return ['result' => 'success'];
     });
 
 });

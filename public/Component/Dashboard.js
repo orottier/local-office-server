@@ -1,8 +1,10 @@
 var Dashboard = Vue.extend({
     data: function () {
         return {
-            'appState': appState,
-            'userData': {}
+            appState: appState,
+            userData: {
+                mac_addresses: []
+            }
         };
     },
     template: `
@@ -12,8 +14,8 @@ var Dashboard = Vue.extend({
             Add new: <input v-model="newMacAddress" v-on:keyup.enter="addMacAddress">
             <ul>
                 <li v-for="mac in userData.mac_addresses">
-                    <span>{{ mac }}</span>
-                    <button v-on:click="removeAddress($index)">X</button>
+                    <span>{{ mac.mac_address }}</span>
+                    <button v-on:click="removeAddress(mac)">X</button>
                 </li>
             </ul>
         </div>`,
@@ -21,27 +23,28 @@ var Dashboard = Vue.extend({
         addMacAddress: function () {
             var text = this.newMacAddress.trim();
             if (text) {
-                this.userData.mac_addresses.push(text);
-                this.newMacAddress = '';
-                this.syncAddresses();
+                this.$http.post('/api/users/me/mac-addresses', {address: text}).then(
+                    function(result) {
+                        this.newMacAddress = '';
+                        this.loadAddresses();
+                    });
             }
         },
-        removeAddress: function (index) {
-            this.userData.mac_addresses.splice(index, 1);
-            this.syncAddresses();
+        removeAddress: function (mac) {
+            this.$http.delete('/api/mac-addresses/' + mac.id).then(
+                function(result) {
+                    this.loadAddresses();
+                });
         },
-        syncAddresses: function () {
-            this.$http.post('/api/me/addresses', {addresses: this.userData.mac_addresses}).then(
-                function (result) {}
+        loadAddresses: function () {
+            this.$http.get('/api/users/me/mac-addresses').then(
+                function(result) {
+                    this.userData.mac_addresses = result.data;
+                }
             );
         }
     },
     ready: function () {
-        this.$http.get('/api/me').then(
-            function(result) {
-                console.log(result);
-                this.userData = result.data;
-            }
-        );
+        this.loadAddresses();
     }
 })

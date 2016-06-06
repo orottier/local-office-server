@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class MacAddress extends Model
 {
-    protected $guarded = [
-        'id'
+    protected $fillable = [
+        'mac_address'
     ];
 
     protected $visible = [
-        'mac_address',
+        'id', 'mac_address',
     ];
 
     public function user()
