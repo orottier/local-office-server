@@ -11,12 +11,6 @@
 |
 */
 
-use Illuminate\Http\Request;
-use App\Jobs\SendSlackMessage;
-use App\Jobs\WriteMacAddresses;
-use App\User;
-use App\MacAddress;
-
 $app->get('/', function () {
     return view('spa');
 });
@@ -25,6 +19,9 @@ $app->get('/', function () {
 /*
  * TODO remove debug routes
  ****************************************************************/
+use App\Jobs\WriteMacAddresses;
+use App\User;
+
 $app->get('/api/users', function () {
     return User::with('macAddresses')->get();
 });
@@ -39,76 +36,27 @@ $app->get('/api/jobs', function () {
  */
 
 
-$app->get('/api/status', function (Request $request) {
-    $loggedIn = false;
-    $user = Auth::user();
-    if ($user) {
-        $loggedIn = $user->username;
-    }
-    return [
-        'status' => 'amazeballs',
-        'loggedIn' => $loggedIn,
-    ];
-});
+$app->group([
+    'prefix' => 'api',
+    'namespace' => 'App\Http\Controllers',
+], function () use ($app) {
 
-$app->post('/api/request-token', function (Request $request) {
-    $username = $request->input('username');
-    $token = substr(md5(rand()), 0, 12);
+    $app->get('/status', ['uses' => 'APIController@status']);
+    $app->post('/request-token', ['uses' => 'APIController@requestToken']);
 
-    $user = User::firstOrNew([
-        'username' => $username,
-    ]);
-    $user->token = $token;
-    $user->save();
-
-    $success = dispatch(new SendSlackMessage('@' . $username, 'here is your token: `' . $token . '`'));
-    return [
-        'username' => $username,
-        'status' => $success ? 'success' : 'error',
-    ];
 });
 
 $app->group([
     'prefix' => 'api',
     'middleware' => 'auth',
+    'namespace' => 'App\Http\Controllers',
 ], function () use ($app) {
 
-    $app->get('/users/{id}', function ($id) {
-        if ($id === 'me') {
-            $user = Auth::user();
-        } else {
-            $user = User::findOrFail($id);
-            $this->authorize('view', $user);
-        }
-        return $user;
-    });
+    $app->get('/users/{id}', ['uses' => 'UserController@view']);
 
-    $app->get('/users/{id}/mac-addresses', function ($id) {
-        if ($id === 'me') {
-            $user = Auth::user();
-        } else {
-            $user = User::findOrFail($id);
-            $this->authorize('view', $user);
-        }
-        return $user->macAddresses;
-    });
-    $app->post('/users/{id}/mac-addresses', function ($id, Request $request) {
-        if ($id === 'me') {
-            $user = Auth::user();
-        } else {
-            $user = User::findOrFail($id);
-            $this->authorize('view', $user);
-        }
-        $address = new MacAddress(['mac_address' => $request->input('address')]);
-        $this->authorize('create', $address);
-        $user->macAddresses()->save($address);
-        return $address;
-    });
-    $app->delete('/mac-addresses/{id}', function ($id) {
-        $address = MacAddress::findOrFail($id);
-        $this->authorize('delete', $address);
-        $address->delete();
-        return ['result' => 'success'];
-    });
+    $app->get('/users/{id}/mac-addresses', ['uses' => 'MacAddressController@indexForUser']);
+    $app->post('/users/{id}/mac-addresses', ['uses' => 'MacAddressController@createForUser']);
+
+    $app->delete('/mac-addresses/{id}', ['uses' => 'MacAddressController@delete']);
 
 });
