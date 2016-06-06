@@ -2,9 +2,9 @@
 
 namespace App\Providers;
 
-use App\User;
+use App\Models\User;
 use App\Policies\UserPolicy;
-use App\MacAddress;
+use App\Models\MacAddress;
 use App\Policies\MacAddressPolicy;
 
 use Illuminate\Support\Facades\Gate;

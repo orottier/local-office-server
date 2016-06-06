@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\User;
-use App\MacAddress;
+use App\Models\User;
+use App\Models\MacAddress;
 
 class MacAddressPolicy
 {

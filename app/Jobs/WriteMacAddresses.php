@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use App\User;
+use App\Models\User;
 
 class WriteMacAddresses extends QueuedJob
 {

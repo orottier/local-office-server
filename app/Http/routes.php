@@ -20,7 +20,7 @@ $app->get('/', function () {
  * TODO remove debug routes
  ****************************************************************/
 use App\Jobs\WriteMacAddresses;
-use App\User;
+use App\Models\User;
 
 $app->get('/api/users', function () {
     return User::with('macAddresses')->get();
