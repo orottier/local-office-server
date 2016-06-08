@@ -1,7 +1,6 @@
 /vendor
-/public/vue.js
-/public/vue-router.js
-/public/vue-resource.js
 .env
 /database/database.sqlite
-/storage/*
+/storage
+/node_modules
+/public/assets

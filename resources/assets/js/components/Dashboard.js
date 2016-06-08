@@ -1,5 +1,6 @@
 var Dashboard = Vue.extend({
     data: function () {
+        currentView: 'home'
         return {
             'appState': appState,
             'userData': {}

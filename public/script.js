@@ -4,6 +4,8 @@ var appState = {
     loggedIn: false,
 }
 
+var userIsloggedIn = appState.loggedIn;
+
 var App = Vue.extend({});
 
 var router = new VueRouter();
@@ -18,6 +20,9 @@ router.map({
     '/dashboard': {
         component: Dashboard,
         auth: true
+    },
+    '/sonos': {
+        component: Sonos,
     }
 })
 

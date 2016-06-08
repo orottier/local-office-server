@@ -6,26 +6,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
 </head>
 
 <body>
 
+   <loginmenu></loginmenu>
 <div id='app'>
     <h1>Welcome to the office!</h1>
+
+
+
+    <div class="wrapper">
+    <!-- Include -->
+
+
 
     <!-- route outlet -->
     <router-view transition="expand" transition-mode="out-in">
     </router-view>
 </div>
 
-<script src="/vue.js"></script>
-<script src="/vue-router.js"></script>
-<script src="/vue-resource.js"></script>
+<script src="/assets/js/vue.js"></script>
 
-<script src="/Component/RequestToken.js"></script>
-<script src="/Component/EnterToken.js"></script>
-<script src="/Component/Dashboard.js"></script>
+<script src="/assets/js/components.js"></script>
+
 
 <script src="/script.js"></script>
 </body>
