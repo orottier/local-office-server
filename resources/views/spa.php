@@ -11,20 +11,15 @@
 
 <body>
 
-   <loginmenu></loginmenu>
 <div id='app'>
-    <h1>Welcome to the office!</h1>
-
-
-
-    <div class="wrapper">
-    <!-- Include -->
-
-
-
-    <!-- route outlet -->
-    <router-view transition="expand" transition-mode="out-in">
-    </router-view>
+    <loginmenu></loginmenu>
+      <div class="container">
+        <h1>Welcome to the office!</h1>
+          <div class="wrapper">
+        <!-- route outlet -->
+        <router-view transition="expand" transition-mode="out-in">
+        </router-view>
+        </div>
 </div>
 
 <script src="/assets/js/vue.js"></script>

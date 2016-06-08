@@ -33,7 +33,7 @@ var loginMenu = Vue.extend({
 );
 
     Vue.component('loginmenu', loginMenu),
-    new Vue({
+    Vue.extend({
       el: 'body',
       components:  {
           'loginmenu': loginMenu
