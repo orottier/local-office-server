@@ -22,7 +22,7 @@ gulp.task('compile', function() {
       .pipe(concat('components.js'))
       .pipe(gulp.dest('./public/assets/js'));
 
-    gulp.src(['./resources/assets/js/vue/vue.js', './resources/assets/js/vue/vue-*.js'])
+    gulp.src(['node_modules/vue/dist/vue.min.js', 'node_modules/vue-resource/dist/vue-resource.min.js',  'node_modules/vue-router/dist/vue-router.min.js'])
       .pipe(concat('vue.js'))
       .pipe(gulp.dest('./public/assets/js'));
    console.log('✅  JS compile complete');

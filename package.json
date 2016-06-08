@@ -6,6 +6,9 @@
   "dependencies": {
     "gulp-concat": "*",
     "gulp-less": "*",
-    "path": "*"
+    "path": "*",
+    "vue": "*",
+    "vue-resource": "*",
+    "vue-router": "*"
   }
 }
