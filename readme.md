@@ -1,21 +1,25 @@
-# Lumen PHP Framework
+# Kantoortuin
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://poser.pugx.org/laravel/lumen-framework/d/total.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/lumen-framework/v/stable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/lumen-framework/v/unstable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://poser.pugx.org/laravel/lumen-framework/license.svg)](https://packagist.org/packages/laravel/lumen-framework)
+Your friendly local office server will aid you in your day to day office live
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+It's a next generation sentient machine that enjoys talking to other services and devices to put some synergy in your depressing workplace.
+- Sonos
+- Check in system
+- Slack
+- Third party APIs
 
-## Official Documentation
+## Features
 
-Documentation for the framework can be found on the [Lumen website](http://lumen.laravel.com/docs).
+- Auto check in if your laptop connects to the network
+- Tells you which song is playing
 
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+Todo:
+- Plan your cocktail Friday
+- Get notified if the boss enters the office
+- Play songs at given times (lunch tune, cocktail tune)
+- Play a song at given events (boss enters the office)
+- Connect with barcode reader to order supplies from grocery store
 
 ## License
 
-The Lumen framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+The Kantoortuin is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
