@@ -9,6 +9,9 @@
     "path": "*",
     "vue": "*",
     "vue-resource": "*",
-    "vue-router": "*"
+    "vue-router": "*",
+    "gulp-eslint": "*",
+    "merge-stream": "*",
+    "gulp-clean-css": "*"
   }
 }
