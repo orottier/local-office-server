@@ -27,7 +27,7 @@ class SendSlackMessage extends Job
         ]);
 
         try {
-            $response = $client->request('POST', 'https://hooks.slack.com/services/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', [
+            $response = $client->request('POST', 'https://hooks.slack.com/services/' . env('SLACK_ENDPOINT'), [
                 'json' => [
                     'channel' => $this->recipient,
                     'text' => $this->message,
