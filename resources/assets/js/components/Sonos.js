@@ -14,23 +14,21 @@ var Sonos = Vue.extend({
                   <td>{{ track.name }}</td>
                   <td><span v-on:click="playSong(track.uri)"><button class="icon-button">Play next</button></span></div>
                 </tr>
-                </table>
+            </table>
         </div>`,
-        methods: {
-            searchSong: function () {
-              this.$http.get('https://api.spotify.com/v1/search?q=' + this.spotifySong + '&type=track', function(tracks)
-                {
-                    this.spotifyData = tracks;
-                });
-            },
-            playSong: function (song) {
-
-              var url = 'http://192.168.1.28:5005/Marketing/spotify/next/:arg';
-              var arg = {arg: song};
-              Vue.http.jsonp(url, arg, function (){ });
-            },
+    methods: {
+        searchSong: function () {
+            this.$http.get('https://api.spotify.com/v1/search?q=' + this.spotifySong + '&type=track', function(tracks) {
+                this.spotifyData = tracks;
+            });
         },
+        playSong: function (song) {
+            var url = 'http://192.168.1.28:5005/Marketing/spotify/next/:arg';
+            var arg = {arg: song};
+            Vue.http.jsonp(url, arg, function (){ });
+        },
+    },
     ready: function () {
 
     }
-})
+});
