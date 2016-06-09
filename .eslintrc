@@ -16,9 +16,9 @@
                 "skipBlankLines": true
             }
         ],
-        "no-mixed-spaces-and-tabs": [
+        "indent": [
             "error",
-            "smart-tabs"
+            4
         ]
     }
 }

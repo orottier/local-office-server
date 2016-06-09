@@ -3,6 +3,7 @@ var concat = require('gulp-concat');
 var less = require('gulp-less');
 var path = require('path');
 var cleanCSS = require('gulp-clean-css');
+
 gulp.task('compile', function() {
     console.log('Launching rocket to compile.. 🚀');
 
@@ -29,8 +30,6 @@ gulp.task('compile', function() {
         .pipe(gulp.dest('./public/assets/js'));
     console.log('✅  JS compile complete');
 });
-
-
 
 gulp.task('lint', function lintCssTask() {
     // Only need this in the linter
