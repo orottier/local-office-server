@@ -1,17 +1,19 @@
 {
-  "private": true,
-  "devDependencies": {
-    "gulp": "^3.8.8"
-  },
-  "dependencies": {
-    "gulp-concat": "*",
-    "gulp-less": "*",
-    "path": "*",
-    "vue": "*",
-    "vue-resource": "*",
-    "vue-router": "*",
-    "gulp-eslint": "*",
-    "merge-stream": "*",
-    "gulp-clean-css": "*"
-  }
+    "private": true,
+    "devDependencies": {
+        "gulp": "^3.8.8"
+    },
+    "dependencies": {
+        "eslint-plugin-html": "*",
+        "gulp-clean-css": "*",
+        "gulp-concat": "*",
+        "gulp-eslint": "*",
+        "gulp-less": "*",
+        "gulp-stylelint": "*",
+        "merge-stream": "*",
+        "path": "*",
+        "vue": "*",
+        "vue-resource": "*",
+        "vue-router": "*"
+    }
 }
