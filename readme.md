@@ -20,6 +20,34 @@ Todo:
 - Play a song at given events (boss enters the office)
 - Connect with barcode reader to order supplies from grocery store
 
+## Get started with your dev environment
+
+Option 1: if you have a webserver, PHP, some database service, npm and composer running locally
+- clone this repo
+- point your webserver to the /public folder
+
+Option 2: using Docker to run the components
+- Install and run Docker
+- clone this repo with submodules: `git clone --recursive ...`
+- `docker-compose up -d  nginx mysql`
+- use `docker-machine ip` to find out the docker IP address (e.g. for setting the db host)
+- Enter the virtual machine: `docker exec -it {Workspace-Container-Name} bash` (check `docker-compose ps`)
+
+Next:
+
+- `cp .env.example .env` and update accordingly
+- `composer install`
+- `php artisan migrate`
+- `npm install`
+- `gulp compile`
+
+## Run in production
+
+TODO, don't use the dev method, it's too heavy on the rpi. Should be something like
+- compile all assets in prod mode
+- copy over the files
+- run migrations
+
 ## License
 
 The Kantoortuin is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
