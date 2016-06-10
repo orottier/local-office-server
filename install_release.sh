@@ -23,6 +23,11 @@ sudo -u www-data php artisan migrate --force --no-interaction
 echo "Reloading Apache"
 sudo service apache2 reload
 
+echo "Reloading supervisor"
+sudo supervisorctl reread
+sudo supervisorctl update
+sudo supervisorctl start lumen-worker:*
+
 cd $RELEASES
 echo "Deleting old releases"
 ls -1d 20* | head -n -{{ $KEEP_RELEASES }} | xargs -d "\n" rm -Rf;
