@@ -29,7 +29,7 @@ Option 1: if you have a webserver, PHP, some database service, npm and composer 
 Option 2: using Docker to run the components
 - Install and run Docker
 - clone this repo with submodules: `git clone --recursive ...`
-- `docker-compose up -d  nginx mysql`
+- in the `laradock` folder: `docker-compose up -d  nginx mysql`
 - use `docker-machine ip` to find out the docker IP address (e.g. for setting the db host)
 - Enter the virtual machine: `docker exec -it {Workspace-Container-Name} bash` (check `docker-compose ps`)
 
