@@ -25,4 +25,6 @@ after_success:
 - ssh-add ssh_deploy_key
 - cp ssh_config ~/.ssh/config
 - cp known_hosts ~/.ssh/known_hosts
-- scp readme.md otto@remote:/tmp
+- tar -zcvf release.tar.gz app artisan bootstrap database public vendor
+- scp release.tar.gz otto@remote:/tmp
+- ssh otto@remote 'cd /tmp && mkdir release && mv release.tar.gz release && cd release && tar -xvzf release.tar.gz > /dev/null && php artisan list'
