@@ -45,10 +45,21 @@ Next:
 
 ## Run in production
 
-TODO, don't use the dev method, it's too heavy on the rpi. Should be something like
-- compile all assets in prod mode
-- copy over the files
-- run migrations
+This repo comes with a `.travis.yml` file to set up continuous integration. Pushing work to master will deploy code to the office raspberry py:
+- Travis will clone the repo, install dependecies and run tests
+- on success, `deploy.sh` will run
+    - package the files needed for running the app
+    - copy it to the server
+- then `install_release.sh` will be run on the office server
+    - move the app files to the right place
+    - make sure it's runnable by setting env and database
+    - run migrations
+    - reload apache
+
+The deploy process depends on an encrypted travis file: `secrets.tar`, containing
+ - a private key to log in to the server (`ssh_deploy_key`, make sure you add the pubkey to the `authorized_keys` on the server)
+ - a `known_hosts` file with the signature of the server
+ - a ssh config file, with the server host and port (called `ssh_config`, containing Host `remote`)
 
 ## License
 
