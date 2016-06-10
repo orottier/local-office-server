@@ -30,6 +30,6 @@ after_success:
 - ssh-add ssh_deploy_key
 - cp ssh_config ~/.ssh/config
 - cp known_hosts ~/.ssh/known_hosts
-- tar -zcvf release.tar.gz app artisan bootstrap database public vendor
+- tar -zcvf release.tar.gz app artisan bootstrap database install_release.sh public resources vendor
 - scp release.tar.gz otto@remote:/tmp
-- ssh otto@remote 'cd /tmp && mkdir release && mv release.tar.gz release && cd release && tar -xvzf release.tar.gz > /dev/null && php artisan list'
+- ssh otto@remote 'mkdir -p /tmp/release && tar -xvzf /tmp/release.tar.gz -C /tmp/release > /dev/null && bash /tmp/release/install_release.sh'
