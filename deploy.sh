@@ -4,6 +4,7 @@ set -e
 
 if [ "$TRAVIS_BRANCH" == "master" ]; then
 
+    echo "Setting up config"
     openssl aes-256-cbc -K $encrypted_625fb94bd2ee_key -iv $encrypted_625fb94bd2ee_iv -in secrets.tar.enc -out secrets.tar -d
     tar xvf secrets.tar
     eval "$(ssh-agent -s)"
@@ -14,8 +15,13 @@ if [ "$TRAVIS_BRANCH" == "master" ]; then
 
     # Skip the dev dependencies
     composer install --no-interaction --prefer-dist --no-dev
-    tar -zcvf release.tar.gz app artisan bootstrap database install_release.sh public resources vendor
 
+    echo "Packaging release"
+    tar -zcvf release.tar.gz app artisan bootstrap database install_release.sh public resources vendor > /dev/null
+
+    echo "Sending files to the remote"
     scp release.tar.gz otto@remote:/tmp
+
+    echo "Run release install on the remote host"
     ssh otto@remote 'mkdir -p /tmp/release && tar -xvzf /tmp/release.tar.gz -C /tmp/release > /dev/null && bash /tmp/release/install_release.sh'
 fi
