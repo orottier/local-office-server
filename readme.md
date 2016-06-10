@@ -1,6 +1,8 @@
 # Kantoortuin
 
-Your friendly local office server will aid you in your day to day office live
+[![Build Status](https://travis-ci.org/orottier/local-office-server.svg?branch=master)](https://travis-ci.org/orottier/local-office-server)
+
+Your friendly local office server will aid you in your day to day office life
 
 It's a next generation sentient machine that enjoys talking to other services and devices to put some synergy in your depressing workplace.
 - Sonos
