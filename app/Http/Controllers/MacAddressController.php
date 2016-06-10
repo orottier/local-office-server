@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\MacAddress;
 
+use App\Jobs\WriteMacAddresses;
+
 class MacAddressController extends Controller
 {
     public function indexForUser($id) {
@@ -30,6 +32,9 @@ class MacAddressController extends Controller
         $address = new MacAddress(['mac_address' => $request->input('address')]);
         $this->authorize('create', $address);
         $user->macAddresses()->save($address);
+
+        $this->dispatch(new WriteMacAddresses(storage_path('users.list')));
+
         return $address;
     }
 
@@ -37,6 +42,9 @@ class MacAddressController extends Controller
         $address = MacAddress::findOrFail($id);
         $this->authorize('delete', $address);
         $address->delete();
+
+        $this->dispatch(new WriteMacAddresses(storage_path('users.list')));
+
         return ['result' => 'success'];
     }
 }

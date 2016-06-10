@@ -19,10 +19,9 @@ class WriteMacAddresses extends QueuedJob
         $fp = fopen($scratchFile, 'w');
         User::with('macAddresses')->chunk(100, function ($users) use ($fp) {
             $users->each(function ($user) use ($fp) {
-                $lines = $user->macAddresses->map(function ($address) use ($user) {
-                    return $address->mac_address . ' ' . $user->username;
+                $lines = $user->macAddresses->each(function ($address) use ($user, $fp) {
+                    fwrite($fp, $address->mac_address . ' ' . $user->username . "\n");
                 });
-                fwrite($fp, $lines->implode("\n") . "\n");
             });
         });
         fclose($fp);
