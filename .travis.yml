@@ -22,4 +22,4 @@ script:
 - gulp compile
 
 after_success:
-- $TRAVIS_BRANCH == "master" && bash deploy.sh
+-  bash deploy.sh
