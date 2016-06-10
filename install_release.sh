@@ -24,10 +24,8 @@ echo "Reloading Apache"
 sudo service apache2 reload
 
 echo "Reloading supervisor"
-sudo supervisorctl reread
-sudo supervisorctl update
-sudo supervisorctl start lumen-worker:*
+sudo service supervisor restart
 
 cd $RELEASES
 echo "Deleting old releases"
-ls -1d 20* | head -n -{{ $KEEP_RELEASES }} | xargs -d "\n" rm -Rf;
+ls -1d 20* | head -n -"$KEEP_RELEASES" | xargs -d "\n" rm -Rf;
