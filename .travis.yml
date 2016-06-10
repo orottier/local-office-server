@@ -14,7 +14,7 @@ before_script:
 - cp .env.travis .env
 - mysql -e 'create database test_db;'
 - phpenv config-rm xdebug.ini
-- composer self-update
+- if [ -n "$GH_TOKEN" ]; then composer config github-oauth.github.com ${GH_TOKEN}; fi;
 - composer install --no-interaction --prefer-dist
 
 script:
