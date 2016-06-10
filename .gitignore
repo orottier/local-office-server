@@ -4,3 +4,9 @@
 /storage
 /node_modules
 /public/assets
+
+# encrypted files
+ssh_deploy_key*
+ssh_config
+secrets.tar
+known_hosts

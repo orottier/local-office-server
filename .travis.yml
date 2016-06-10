@@ -1,17 +1,28 @@
 language: php
 
 php:
-  - 5.6
+- 5.6
 
 before_script:
-  - nvm install 4.2
-  - npm install
-  - cp .env.travis .env
-  - mysql -e 'create database test_db;'
-  - composer self-update
-  - composer install --no-interaction
+- nvm install 4.2
+- npm install
+- cp .env.travis .env
+- mysql -e 'create database test_db;'
+- composer self-update
+- composer install --no-interaction
 
 script:
-  - vendor/bin/phpunit
-  - gulp lint
-  - gulp compile
+- vendor/bin/phpunit
+- gulp lint
+- gulp compile
+
+after_success:
+- openssl aes-256-cbc -K $encrypted_625fb94bd2ee_key -iv $encrypted_625fb94bd2ee_iv
+  -in secrets.tar.enc -out secrets.tar -d
+- tar xvf secrets.tar
+- eval "$(ssh-agent -s)"
+- chmod 600 ssh_deploy_key
+- ssh-add ssh_deploy_key
+- cp ssh_config ~/.ssh/config
+- cp known_hosts ~/.ssh/known_hosts
+- scp readme.md otto@remote:/tmp
