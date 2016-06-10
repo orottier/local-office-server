@@ -24,7 +24,7 @@ class APIController extends Controller
     }
 
     public function requestToken(Request $request) {
-        $username = $request->input('username');
+        $username = strtolower($request->input('username'));
         $token = substr(md5(rand()), 0, 12);
 
         $user = User::firstOrNew([

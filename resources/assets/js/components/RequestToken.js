@@ -27,6 +27,7 @@ var RequestToken = Vue.extend({
                 ).then(
                     function(result) {
                         if (result.data.status === 'success') {
+                            this.appState.username = result.data.username;
                             router.go('/enter');
                         } else {
                             this.working = false;
