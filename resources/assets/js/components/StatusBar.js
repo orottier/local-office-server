@@ -1,17 +1,13 @@
-var loginMenu = Vue.extend({
+var StatusBar = Vue.extend({
     data: function () {
         return {
             'currentSong': ''
         };
     },
     template: `
-
       <header>
           <h1 class="page-header">Kantoortuin 🌷 🌼 🌸</h1>
-
              <div class="ticker" v-on:click="getNowPlaying">Welcome to the TNW Kantoortuin! Now playing is {{ currentSong }}</div>
-
-
       </header>
       `,
     methods: {
@@ -31,10 +27,4 @@ var loginMenu = Vue.extend({
     },
 });
 
-Vue.component('loginmenu', loginMenu),
-    Vue.extend({
-        el: 'body',
-        components:  {
-            'loginmenu': loginMenu
-        },
-    })
+Vue.component('statusbar', StatusBar)

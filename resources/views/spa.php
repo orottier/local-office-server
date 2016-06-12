@@ -12,7 +12,8 @@
 <body>
 
 <div id='app'>
-    <loginmenu></loginmenu>
+    <statusbar></statusbar>
+    <error-bar></error-bar>
     <div class="container">
         <h1>Welcome to the office!</h1>
         <div class="wrapper">
