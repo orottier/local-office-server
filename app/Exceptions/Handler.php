@@ -69,6 +69,19 @@ class Handler extends ExceptionHandler
 
             return response()->json(['error' => $response], $response['status']);
         }
-        return parent::render($request, $e);
+
+        if ($e instanceof HttpException) {
+            $status = $e->getStatusCode();
+
+            if (view()->exists('errors.' . $status)) {
+                return response(view('errors.' . $status), $status);
+            }
+        }
+
+        if (env('APP_DEBUG', false)) {
+            return parent::render($request, $e);
+        } else {
+            return response(view("errors.500"), 500);
+        }
     }
 }

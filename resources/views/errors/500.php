@@ -14,11 +14,8 @@
 <div id='app'>
     <loginmenu></loginmenu>
     <div class="container">
-        <h1>Welcome to the office!</h1>
-        <div class="wrapper">
-            <router-view transition="expand" transition-mode="out-in">
-            </router-view>
-        </div>
+        <h1>500 internal server error</h1>
+        <a href='/'>Go home</a>
     </div>
 </div>
 
