@@ -1,6 +1,5 @@
 var Dashboard = Vue.extend({
     data: function () {
-        currentView: 'home'
         return {
             appState: appState,
             working: false,
@@ -47,11 +46,10 @@ var Dashboard = Vue.extend({
         },
         removeAddress: function (index, mac) {
             mac.deleting = true;
-            this.userData.mac_addresses.$set(index, mac);
+            Vue.set(mac, 'deleting', true);
             this.$http.delete('/api/mac-addresses/' + mac.id).then(
-                function(result) {
-                    this.loadAddresses();
-                }
+                function(result) { this.loadAddresses(); },
+                function(error) { Vue.set(mac, 'deleting', false); }
             );
         },
         loadAddresses: function () {
@@ -61,7 +59,7 @@ var Dashboard = Vue.extend({
                         Vue.set(result.data[i], 'deleting', false);
                     }
                     this.userData.mac_addresses = result.data;
-                }
+                }, function(error) {}
             );
         }
     },

@@ -21,7 +21,6 @@ if (cookie) {
 var App = Vue.extend({});
 
 var router = new VueRouter();
-
 router.map({
     '/': {
         component: RequestToken
@@ -51,6 +50,8 @@ router.beforeEach(function (transition) {
         transition.next();
     }
 });
+
+Vue.component('statusbar', StatusBar)
 
 Vue.http.interceptors.push({
 

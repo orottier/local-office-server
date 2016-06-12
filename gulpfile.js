@@ -32,18 +32,16 @@ gulp.task('compile', function() {
 });
 
 gulp.task('lint', function lintCssTask() {
-    // Only need this in the linter
-    var gulpStylelint = require('gulp-stylelint');
+    console.log('🖇  Checking JS');
     var eslint = require('gulp-eslint');
-    var merge = require('merge-stream');
-    console.log('🖇  Starting checking JS');
-    var jslint = gulp.src(['./resources/assets/js/components/*.js'])
+    var jslint = gulp.src(['./resources/assets/js/components/*.js', './public/script.js'])
         .pipe(eslint({}))
         .pipe(eslint.format())
         .pipe(eslint.failAfterError())
 
 
-    console.log('🖇  Starting checking LESS');
+    console.log('🖇  Checking LESS');
+    var gulpStylelint = require('gulp-stylelint');
     var stylelint = gulp.src('./resources/assets/less/*.less')
         .pipe(gulpStylelint({
             reporters: [{
@@ -53,6 +51,6 @@ gulp.task('lint', function lintCssTask() {
         }));
 
 
+    var merge = require('merge-stream');
     return merge(jslint, stylelint);
-
 });

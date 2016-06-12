@@ -34,5 +34,3 @@ var StatusBar = Vue.extend({
         this.getNowPlaying();
     },
 });
-
-Vue.component('statusbar', StatusBar)
