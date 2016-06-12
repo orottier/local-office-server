@@ -12,12 +12,15 @@ var StatusBar = Vue.extend({
       `,
     methods: {
         getNowPlaying: function () {
-            this.$http.get('http://192.168.1.28:5005/Marketing/state').then(
+            this.$http.get('http://192.168.1.28:5005/Marketing/state', {}, {
+                    timeout: 3000
+                }).then(
                 function(result) {
                     this.currentSong = result.data.currentTrack.artist + ' - ' + result.data.currentTrack.title;
-
-                    this.$set('currentSong', result.data.currentTrack.artist + ' - ' + result.data.currentTrack.title);
-                    setTimeout(this.getNowPlaying, 2000);
+                    setTimeout(this.getNowPlaying, 5000);
+                },
+                function(error) {
+                    this.currentSong = '[error connecting to Sonos]';
                 }
             );
         },
