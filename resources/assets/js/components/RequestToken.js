@@ -1,10 +1,10 @@
 var RequestToken = Vue.extend({
     data: function () {
         return {
-            'appState': appState,
-            'errorMsg': '',
-            'cta': 'Submit',
-            'working': false
+            appState: appState,
+            errorMsg: '',
+            cta: 'Submit',
+            working: false
         };
     },
     template: `
@@ -17,11 +17,20 @@ var RequestToken = Vue.extend({
             </form>
         </div>`,
     methods: {
+        lockForm: function() {
+            this.working = true;
+            this.cta = 'Loading...';
+            this.errorMsg = '';
+        },
+        freeForm: function(errorMsg) {
+            this.working = false;
+            this.cta = 'Submit';
+            this.errorMsg = errorMsg;
+            document.getElementById('loginInput').focus();
+        },
         requestToken: function() {
             if (this.appState.username) {
-                this.working = true;
-                this.cta = 'Loading...';
-                this.errorMsg = '';
+                this.lockForm();
                 this.$http.post('/api/request-token',
                     {'username': this.appState.username}
                 ).then(
@@ -30,19 +39,18 @@ var RequestToken = Vue.extend({
                             this.appState.username = result.data.username;
                             router.go('/enter');
                         } else {
-                            this.working = false;
-                            this.cta = 'Submit';
-                            this.errorMsg = 'Something went wrong!';
-                            document.getElementById('loginInput').focus();
+                            this.freeForm('Could not send login token to "' + result.data.username + '"');
                         }
+                    }, function (error) {
+                        this.freeForm('Something went wrong!');
                     }
                 );
             } else {
-                document.getElementById('loginInput').focus();
+                this.freeForm();
             }
         }
     },
     ready: function () {
-        document.getElementById('loginInput').focus();
+        this.freeForm();
     }
 })

@@ -18,10 +18,19 @@ var EnterToken = Vue.extend({
             <a v-link="{ path: '/' }">Try again</a>
         </div>`,
     methods: {
+        lockForm: function() {
+            this.working = true;
+            this.cta = 'Loading...';
+        },
+        freeForm: function(errorMsg) {
+            this.working = false;
+            this.cta = 'Submit';
+            this.errorMsg = errorMsg;
+            document.getElementById('tokenInput').focus();
+        },
         enterToken: function() {
             if (this.appState.token) {
-                this.working = true;
-                this.cta = 'Loading...';
+                this.lockForm();
                 Vue.http.headers.common['X-Authorization'] = 'Bearer ' + this.appState.token;
                 this.errorMsg = 'Authorization has been set, checking...';
                 this.$http.get('/api/status')
@@ -31,17 +40,18 @@ var EnterToken = Vue.extend({
                                 this.appState.logged_in = true;
                                 router.go('/dashboard');
                             } else {
-                                this.working = false;
-                                this.cta = 'Submit';
-                                this.errorMsg = 'Could not verify this token!';
-                                document.getElementById('tokenInput').focus();
+                                this.freeForm('Could not verify this token!');
                             }
+                        }, function (error) {
+                            this.freeForm('Something went wrong!');
                         }
                     );
             } else {
-                document.getElementById('tokenInput').focus();
+                this.freeForm();
             }
         }
+    },
+    ready: function () {
+        this.freeForm();
     }
 })
-
