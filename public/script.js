@@ -1,10 +1,8 @@
 var appState = {
     username: '',
     token: '',
-    loggedIn: false,
+    logged_in: false,
 }
-
-var userIsloggedIn = appState.loggedIn;
 
 var App = Vue.extend({});
 
@@ -28,12 +26,12 @@ router.map({
 
 router.beforeEach(function (transition) {
     if (transition.to.auth) {
-        if (!appState.loggedIn) {
+        if (!appState.logged_in) {
             transition.abort();
         }
         transition.next();
     } else {
-        if (appState.loggedIn) {
+        if (appState.logged_in) {
             transition.abort();
         }
         transition.next();

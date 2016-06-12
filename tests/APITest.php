@@ -9,7 +9,7 @@ class APITest extends TestCase
         $this->get('/api/status')
             ->seeJsonEquals([
                 'status' => 'amazeballs',
-                'loggedIn' => false,
+                'logged_in' => false,
             ]);
     }
 

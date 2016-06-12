@@ -19,7 +19,7 @@ class APIController extends Controller
         }
         return [
             'status' => 'amazeballs',
-            'loggedIn' => $loggedIn,
+            'logged_in' => $loggedIn,
         ];
     }
 

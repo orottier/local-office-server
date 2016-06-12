@@ -27,8 +27,8 @@ var EnterToken = Vue.extend({
                 this.$http.get('/api/status')
                     .then(
                         function(result) {
-                            if (result.data.loggedIn && result.data.loggedIn === this.appState.username) {
-                                this.appState.loggedIn = true;
+                            if (result.data.logged_in && result.data.logged_in === this.appState.username) {
+                                this.appState.logged_in = true;
                                 router.go('/dashboard');
                             } else {
                                 this.working = false;
