@@ -36,6 +36,17 @@ class UserTest extends TestCase
             ]);
     }
 
+    public function testGetMeById()
+    {
+        $user = $this->createUser('otto');
+
+        $response = $this->actingAs($user)
+            ->get('/api/users/' . $user->id)
+            ->seeJson([
+                'username' => 'otto',
+            ]);
+    }
+
     public function testDoNotLeakToken()
     {
         $user = $this->createUser('otto');

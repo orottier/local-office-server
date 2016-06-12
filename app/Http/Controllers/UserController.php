@@ -13,7 +13,7 @@ class UserController extends Controller
             $user = Auth::user();
         } else {
             $user = User::findOrFail($id);
-            $this->authorize('view', $user);
+            $this->authorize('read', $user);
         }
         return $user;
     }

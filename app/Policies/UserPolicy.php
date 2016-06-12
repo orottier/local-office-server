@@ -13,7 +13,7 @@ class UserPolicy
 
     public function read(User $actor, User $subject)
     {
-        return true;
+        return $this->update($actor, $subject);
     }
 
     public function update(User $actor, User $subject)
@@ -23,6 +23,6 @@ class UserPolicy
 
     public function delete(User $actor, User $subject)
     {
-        return $this->update($actor, $address);
+        return $this->update($actor, $subject);
     }
 }
