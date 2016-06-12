@@ -13,18 +13,18 @@ before_script:
 - npm install
 - cp .env.travis .env
 - mysql -e 'create database test_db;'
-- phpenv config-rm xdebug.ini
 - if [ -n "$GH_TOKEN" ]; then composer config github-oauth.github.com ${GH_TOKEN}; fi;
 - composer install --no-interaction --prefer-dist
 
 script:
 - ./vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix --dry-run . -vv
-- vendor/bin/phpunit
+- mkdir -p build/logs && vendor/bin/phpunit
 - gulp lint
 - gulp compile
 
 after_success:
--  bash deploy.sh
+- bash deploy.sh
+- travis_retry php vendor/bin/coveralls -v
 
 notifications:
     email: false
