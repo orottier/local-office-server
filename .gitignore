@@ -4,6 +4,7 @@
 /storage
 /node_modules
 /public/assets
+/.php_cs.cache
 
 # encrypted files
 ssh_deploy_key*
