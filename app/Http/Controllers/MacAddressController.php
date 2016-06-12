@@ -29,7 +29,7 @@ class MacAddressController extends Controller
             $user = Auth::user();
         } else {
             $user = User::findOrFail($id);
-            $this->authorize('view', $user);
+            $this->authorize('read', $user);
         }
         $address = new MacAddress(['mac_address' => $request->input('address')]);
         $this->authorize('create', $address);
