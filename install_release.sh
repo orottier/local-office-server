@@ -24,7 +24,10 @@ echo "Reloading Apache"
 sudo service apache2 reload
 
 echo "Reloading supervisor"
-sudo service supervisor restart
+# workaround supervisor bug http://stackoverflow.com/questions/32738415/supervisor-fails-to-restart-half-of-the-time
+sudo /etc/init.d/supervisor force-stop && \
+sudo /etc/init.d/supervisor stop && \
+sudo /etc/init.d/supervisor start
 
 cd $RELEASES
 echo "Deleting old releases"
