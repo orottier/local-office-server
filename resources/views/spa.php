@@ -23,6 +23,9 @@
     </div>
 </div>
 
+<script>
+    var DEBUG = <?php echo env('APP_DEBUG') ? 'true' : 'false';?>;
+</script>
 <script src="/assets/js/vue.js"></script>
 
 <script src="/assets/js/components.js"></script>

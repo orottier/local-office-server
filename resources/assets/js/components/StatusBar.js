@@ -1,13 +1,17 @@
 var StatusBar = Vue.extend({
     data: function () {
         return {
-            'currentSong': ''
+            currentSong: '',
+            appState: appState,
         };
     },
     template: `
       <header>
           <h1 class="page-header">Kantoortuin 🌷 🌼 🌸</h1>
              <div class="ticker" v-on:click="getNowPlaying">Welcome to the TNW Kantoortuin! Now playing is {{ currentSong }}</div>
+            <section id="debugbar">
+                <p v-for="item in appState.log">{{ item.type }} {{ item.info }}</p>
+            </section>
       </header>
       `,
     methods: {
