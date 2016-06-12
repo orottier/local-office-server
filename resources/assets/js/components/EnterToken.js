@@ -38,6 +38,7 @@ var EnterToken = Vue.extend({
                         function(result) {
                             if (result.data.logged_in && result.data.logged_in === this.appState.username) {
                                 this.appState.logged_in = true;
+                                sessionStorage.setItem('appState', JSON.stringify(appState));
                                 router.go('/dashboard');
                             } else {
                                 this.freeForm('Could not verify this token!');

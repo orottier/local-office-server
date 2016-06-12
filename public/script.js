@@ -1,9 +1,22 @@
-var appState = {
-    username: '',
-    token: '',
-    logged_in: false,
-    log: [],
-};
+var appState;
+function resetAppState()
+{
+    appState = {
+        username: '',
+        token: '',
+        logged_in: false
+    };
+    sessionStorage.setItem('appState', JSON.stringify(appState));
+}
+
+var debugLog = [];
+
+var cookie = sessionStorage.getItem('appState');
+if (cookie) {
+    appState = JSON.parse(cookie);
+} else {
+    resetAppState();
+}
 
 var App = Vue.extend({});
 
@@ -44,7 +57,7 @@ Vue.http.interceptors.push({
     request: function (request) {
         if (DEBUG) {
             var info = request.method + ' ' + request.url;
-            appState.log.unshift({type: '🔼', data: request, info: info});
+            debugLog.unshift({type: '🔼', data: request, info: info});
         }
         return request;
     },
@@ -55,12 +68,17 @@ Vue.http.interceptors.push({
         if (!response.status) {
             info += ' request failed';
         } else if (response.status >= 400) {
-            info += response.data.error.message;
+            info += ', ' + response.data.error.message;
+            if (response.status == 401) {
+                resetAppState();
+                sessionStorage.removeItem('appState');
+                router.go('/');
+            }
         } else {
             show = DEBUG;
         }
         if (show) {
-            appState.log.unshift({type: '🔽', data: response, info: info});
+            debugLog.unshift({type: '🔽', data: response, info: info});
         }
         return response;
     }
@@ -68,3 +86,7 @@ Vue.http.interceptors.push({
 });
 
 router.start(App, '#app');
+if (appState.logged_in) {
+    Vue.http.headers.common['X-Authorization'] = 'Bearer ' + appState.token;
+    router.go('/dashboard');
+}
