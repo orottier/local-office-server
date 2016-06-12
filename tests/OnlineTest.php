@@ -1,6 +1,5 @@
 <?php
 
-use Laravel\Lumen\Testing\DatabaseTransactions;
 
 class OnlineTest extends TestCase
 {

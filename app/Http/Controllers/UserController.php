@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use Auth;
 use App\Models\User;
-use App\Models\MacAddress;
 
 class UserController extends Controller
 {
-    public function view($id) {
+    public function view($id)
+    {
         if ($id === 'me') {
             $user = Auth::user();
         } else {

@@ -55,7 +55,7 @@ class Handler extends ExceptionHandler
             if ($e instanceof HttpException) {
                 $response['message'] = Response::$statusTexts[$e->getStatusCode()];
                 $response['status'] = $e->getStatusCode();
-            } else if ($e instanceof ModelNotFoundException) {
+            } elseif ($e instanceof ModelNotFoundException) {
                 $response['message'] = Response::$statusTexts[Response::HTTP_NOT_FOUND];
                 $response['status'] = Response::HTTP_NOT_FOUND;
             }
@@ -81,7 +81,7 @@ class Handler extends ExceptionHandler
         if (env('APP_DEBUG', false)) {
             return parent::render($request, $e);
         } else {
-            return response(view("errors.500"), 500);
+            return response(view('errors.500'), 500);
         }
     }
 }

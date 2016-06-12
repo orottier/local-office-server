@@ -23,7 +23,8 @@ class APIController extends Controller
         ];
     }
 
-    public function requestToken(Request $request) {
+    public function requestToken(Request $request)
+    {
         $username = strtolower($request->input('username'));
         if (!$username) {
             abort(400);

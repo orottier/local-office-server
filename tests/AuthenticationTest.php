@@ -26,7 +26,7 @@ class AuthenticationTest extends TestCase
         $this->actingAs($user)
             ->get('/api/status')
             ->seeJson([
-                'logged_in' => 'otto'
+                'logged_in' => 'otto',
             ]);
     }
 
@@ -38,7 +38,7 @@ class AuthenticationTest extends TestCase
                 'X-Authorization' => 'Bearer ' . $user->token,
             ])
             ->seeJson([
-                'logged_in' => 'otto'
+                'logged_in' => 'otto',
             ]);
     }
 

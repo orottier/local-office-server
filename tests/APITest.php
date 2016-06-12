@@ -1,6 +1,5 @@
 <?php
 
-use Laravel\Lumen\Testing\DatabaseTransactions;
 
 class APITest extends TestCase
 {

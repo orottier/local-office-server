@@ -29,16 +29,16 @@ class SendSlackMessageTest extends TestCase
     public function testSendSlackMessageOk()
     {
         $client = $this->getClient(new Response(200, ['X-Foo' => 'Bar']));
-        $job = new SendSlackMessage("@otto", "hello", $client);
+        $job = new SendSlackMessage('@otto', 'hello', $client);
         $this->assertTrue($job->handle());
     }
 
     public function testSendSlackMessageFail()
     {
         $client = $this->getClient(
-            new RequestException("Error Communicating with Server", new Request('GET', 'test'))
+            new RequestException('Error Communicating with Server', new Request('GET', 'test'))
         );
-        $job = new SendSlackMessage("@otto", "hello", $client);
+        $job = new SendSlackMessage('@otto', 'hello', $client);
         $this->assertFalse($job->handle());
     }
 
@@ -54,7 +54,7 @@ class SendSlackMessageTest extends TestCase
 
         $client = new Client(['handler' => $stack]);
 
-        $job = new SendSlackMessage("@otto", "hello", $client);
+        $job = new SendSlackMessage('@otto', 'hello', $client);
         $job->handle();
 
         // Count the number of transactions
