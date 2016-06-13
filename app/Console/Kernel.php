@@ -24,6 +24,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('command:fetch-feed http://thenextweb.com/feed/ tnw')->everyFiveMinutes();
+        $schedule->command('command:fetch-feed http://thenextweb.com/feed/')
+            ->everyFiveMinutes()
+            ->sendOutputTo(storage_path('feeds/tnw.json'));
     }
 }

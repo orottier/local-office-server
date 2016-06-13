@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-use Vinelab\Rss\Rss;
+use App\Jobs\FetchFeedJob;
 
 class FetchFeed extends Command
 {
@@ -13,7 +13,7 @@ class FetchFeed extends Command
      *
      * @var string
      */
-    protected $signature = 'command:fetch-feed {feed} {name}';
+    protected $signature = 'command:fetch-feed {feed}';
 
     /**
      * The console command description.
@@ -29,24 +29,8 @@ class FetchFeed extends Command
      */
     public function handle()
     {
-        $rss = new Rss();
-        $feed = $rss->feed($this->argument('feed'));
-        $info = $feed->info();
-
-        $info['articles'] = $feed->articles()->map(function ($article) {
-            return [
-                'title' => $article->title,
-                'description' => $article->description,
-                'pubDate' => $article->pubDate,
-                'link' => $article->link,
-            ];
-        });
-
-        $baseDir = storage_path('feeds');
-        if (!is_dir($baseDir)) {
-            mkdir($baseDir, 0755, true);
-        }
-
-        file_put_contents($baseDir . '/' . $this->argument('name') . '.json', json_encode($info));
+        $job = new FetchFeedJob($this->argument('feed'));
+        $data = dispatch($job);
+        echo json_encode($data);
     }
 }
