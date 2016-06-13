@@ -23,8 +23,8 @@ script:
 - gulp compile
 
 after_success:
-- bash deploy.sh
 - travis_retry php vendor/bin/coveralls -v
+- bash deploy.sh # gets rid of dev dependencies, so put last
 
 notifications:
     email: false
