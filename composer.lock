@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "196245db61900db593bea06522e8318c",
-    "content-hash": "372c4b89acd6b34d48d6c993df5f8f07",
+    "hash": "db005ab6cbd5bbb279c2f5bb63f9644c",
+    "content-hash": "090ac047183a673e3684d22a149d6d9f",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -2376,6 +2376,98 @@
             "description": "Symfony Translation Component",
             "homepage": "https://symfony.com",
             "time": "2016-06-06 11:33:26"
+        },
+        {
+            "name": "vinelab/http",
+            "version": "v1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Vinelab/http.git",
+                "reference": "9231176e7bb1fcc683904ab781f2f033c47333ca"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Vinelab/http/zipball/9231176e7bb1fcc683904ab781f2f033c47333ca",
+                "reference": "9231176e7bb1fcc683904ab781f2f033c47333ca",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "*",
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.9.*",
+                "phpunit/phpunit": "4.3.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Vinelab\\Http": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Abed Halawi",
+                    "email": "abed.halawi@vinelab.com"
+                }
+            ],
+            "description": "An http library developed for the laravel framework. aliases itself as HttpClient",
+            "keywords": [
+                "api",
+                "client",
+                "curl",
+                "http",
+                "json",
+                "laravel",
+                "xml"
+            ],
+            "time": "2015-02-26 17:08:05"
+        },
+        {
+            "name": "vinelab/rss",
+            "version": "v1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Vinelab/RSS.git",
+                "reference": "87ce95ce0e73b3d4d57e0b7870b5d68defb29dbc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Vinelab/RSS/zipball/87ce95ce0e73b3d4d57e0b7870b5d68defb29dbc",
+                "reference": "87ce95ce0e73b3d4d57e0b7870b5d68defb29dbc",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "5.*",
+                "php": ">=5.4.0",
+                "vinelab/http": "*"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.9.*",
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Vinelab\\Rss": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Abed Halawi",
+                    "email": "abed.halawi@vinelab.com"
+                }
+            ],
+            "description": "An elegant RSS 2.0 parser.",
+            "time": "2015-10-14 09:26:25"
         },
         {
             "name": "vlucas/phpdotenv",
