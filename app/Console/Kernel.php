@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        Commands\FetchFeed::class,
     ];
 
     /**
@@ -24,6 +24,6 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        //
+        $schedule->command('command:fetch-feed http://thenextweb.com/feed/ tnw')->everyFiveMinutes();
     }
 }
