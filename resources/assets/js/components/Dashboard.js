@@ -19,6 +19,9 @@ var Dashboard = Vue.extend({
                     <button :disabled="mac.deleting" v-on:click="removeAddress($index, mac)">❌</button>
                 </li>
             </ul>
+            <p>Pro tip, use Terminal.app to find your MAC addresses:</p>
+            <pre>ifconfig en0 | awk '/ether/{print toupper($2)}'
+ifconfig en1 | awk '/ether/{print toupper($2)}'</pre>
         </div>`,
     methods: {
         lockForm: function () {
