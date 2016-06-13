@@ -2,8 +2,9 @@
 
 [![Build Status](https://travis-ci.org/orottier/local-office-server.svg?branch=master)](https://travis-ci.org/orottier/local-office-server)
 [![Coverage Status](https://coveralls.io/repos/github/orottier/local-office-server/badge.svg?branch=master)](https://coveralls.io/github/orottier/local-office-server?branch=master)
+[![Dependency Status](https://www.versioneye.com/user/projects/575e5acb7757a00034dc5474/badge.svg)](https://www.versioneye.com/user/projects/575e5acb7757a00034dc5474)
 
-Your friendly local office server will aid you in your day to day office life
+A friendly local office server that will aid you in your day to day office life.
 
 It's a next generation sentient machine that enjoys talking to other services and devices to put some synergy in your depressing workplace.
 - Sonos
@@ -46,16 +47,16 @@ Next:
 
 ## Run in production
 
-This repo comes with a `.travis.yml` file to set up continuous integration. Pushing work to master will deploy code to the office raspberry py:
+This repo comes with a `.travis.yml` file to set up continuous integration. Pushing work to master will deploy code to the office raspberry pi:
 - Travis will clone the repo, install dependecies and run tests
-- on success, `deploy.sh` will run
+- on success, `deploy.sh` will
     - package the files needed for running the app
     - copy it to the server
 - then `install_release.sh` will be run on the office server
     - move the app files to the right place
     - make sure it's runnable by setting env and database
     - run migrations
-    - reload apache
+    - reload apache and supervisor
 
 The deploy process depends on an encrypted travis file: `secrets.tar`, containing
  - a private key to log in to the server (`ssh_deploy_key`, make sure you add the pubkey to the `authorized_keys` on the server)
