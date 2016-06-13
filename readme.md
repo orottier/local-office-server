@@ -1,6 +1,7 @@
 # Kantoortuin
 
 [![Build Status](https://travis-ci.org/orottier/local-office-server.svg?branch=master)](https://travis-ci.org/orottier/local-office-server)
+[![Coverage Status](https://coveralls.io/repos/github/orottier/local-office-server/badge.svg?branch=master)](https://coveralls.io/github/orottier/local-office-server?branch=master)
 
 Your friendly local office server will aid you in your day to day office life
 
