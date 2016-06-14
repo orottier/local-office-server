@@ -46,7 +46,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-        if ($request->wantsJson()) {
+        if ($request->wantsJson() || $request->is('api/*')) {
             $response = [
                 'message' => (string) $e->getMessage(),
                 'status' => 500,
@@ -58,6 +58,9 @@ class Handler extends ExceptionHandler
             } elseif ($e instanceof ModelNotFoundException) {
                 $response['message'] = Response::$statusTexts[Response::HTTP_NOT_FOUND];
                 $response['status'] = Response::HTTP_NOT_FOUND;
+            } elseif ($e instanceof AuthorizationException) {
+                $response['message'] = Response::$statusTexts[Response::HTTP_NOT_FOUND];
+                $response['status'] = Response::HTTP_FORBIDDEN;
             }
 
             if (env('APP_DEBUG', false)) {
