@@ -20,6 +20,12 @@ class MacAddressTest extends TestCase
         return $user;
     }
 
+    private function expectWriteFileJob()
+    {
+        app('Illuminate\Contracts\Bus\Dispatcher');
+        $this->expectsJobs(App\Jobs\WriteMacAddresses::class);
+    }
+
     public function testListMine()
     {
         $user = $this->createUser('otto');
@@ -52,6 +58,8 @@ class MacAddressTest extends TestCase
         $user = $this->createUser('otto');
         $this->assertCount(0, $user->macAddresses);
 
+        $this->expectWriteFileJob();
+
         $this->actingAs($user);
         $this->post('/api/users/' . $user->id . '/mac-addresses', [
                 'address' => 'te:st',
@@ -69,6 +77,8 @@ class MacAddressTest extends TestCase
     {
         $user = $this->createUser('otto');
         $this->assertCount(0, $user->macAddresses);
+
+        $this->expectWriteFileJob();
 
         $this->actingAs($user);
         $this->post('/api/users/me/mac-addresses', [
@@ -93,6 +103,8 @@ class MacAddressTest extends TestCase
         $user->macAddresses()->save($mac);
 
         $this->assertNotEmpty($mac->id);
+
+        $this->expectWriteFileJob();
 
         $this->actingAs($user)
             ->delete('/api/mac-addresses/' . $mac->id)
