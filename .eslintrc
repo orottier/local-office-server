@@ -11,13 +11,13 @@
     },
     "rules": {
         "no-trailing-spaces": [
-            "error",
+            2,
             {
                 "skipBlankLines": true
             }
         ],
         "indent": [
-            "error",
+            2,
             4
         ]
     }
