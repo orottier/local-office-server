@@ -3,6 +3,9 @@
 [![Build Status](https://travis-ci.org/orottier/local-office-server.svg?branch=master)](https://travis-ci.org/orottier/local-office-server)
 [![Coverage Status](https://coveralls.io/repos/github/orottier/local-office-server/badge.svg?branch=master)](https://coveralls.io/github/orottier/local-office-server?branch=master)
 [![Dependency Status](https://www.versioneye.com/user/projects/575e5acb7757a00034dc5474/badge.svg)](https://www.versioneye.com/user/projects/575e5acb7757a00034dc5474)
+[![Code Climate](https://codeclimate.com/github/orottier/local-office-server/badges/gpa.svg)](https://codeclimate.com/github/orottier/local-office-server)
+[![License](http://img.shields.io/:license-MIT-blue.svg)](http://mit-license.org)
+[![Badges](http://img.shields.io/:badges-6/6-ff6799.svg)](https://github.com/badges/badgerbadgerbadger)
 
 A friendly local office server that will aid you in your day to day office life.
 
