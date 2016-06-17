@@ -17,7 +17,7 @@ if [ "$TRAVIS_BRANCH" == "master" ]; then
     composer install --no-interaction --prefer-dist --no-dev
 
     echo "Packaging release"
-    tar -zcvf release.tar.gz app artisan bootstrap build database install_release.sh public resources vendor > /dev/null
+    tar -zcvf release.tar.gz app artisan bootstrap build database public resources vendor > /dev/null
 
     echo "Sending files to the remote"
     scp release.tar.gz otto@remote:/tmp
