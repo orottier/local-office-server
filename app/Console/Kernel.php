@@ -31,10 +31,7 @@ class Kernel extends ConsoleKernel
 
         // Lunch tune
         $schedule->command('command:play-sonos-song "spotify:track:38A8PsjsoOq7g49uaGZ1k4"')
-            ->weekdays()
-            ->at('12:00');
-        $schedule->command('command:play-sonos-song "spotify:track:38A8PsjsoOq7g49uaGZ1k4"')
-            ->weekdays()
-            ->at('12:30');
+            ->cron('0,30 12 * * 1-5')
+            ->timezone('Europe/Amsterdam');
     }
 }
