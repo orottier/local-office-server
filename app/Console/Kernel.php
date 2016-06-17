@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\FetchFeed::class,
+        Commands\PlaySonosSongConsole::class,
     ];
 
     /**
@@ -27,5 +28,13 @@ class Kernel extends ConsoleKernel
         $schedule->command('command:fetch-feed http://thenextweb.com/feed/')
             ->everyFiveMinutes()
             ->sendOutputTo(storage_path('feeds/tnw.json'));
+
+        // Lunch tune
+        $schedule->command('command:play-sonos-song "spotify:track:38A8PsjsoOq7g49uaGZ1k4"')
+            ->weekdays()
+            ->at('12:00');
+        $schedule->command('command:play-sonos-song "spotify:track:38A8PsjsoOq7g49uaGZ1k4"')
+            ->weekdays()
+            ->at('12:30');
     }
 }
