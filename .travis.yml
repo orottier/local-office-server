@@ -11,7 +11,7 @@ cache:
 before_script:
 - nvm install 4.2
 - npm install
-- cp .env.travis .env
+- cp build/.env .env
 - mysql -e 'create database test_db;'
 - if [ -n "$GH_TOKEN" ]; then composer config github-oauth.github.com ${GH_TOKEN}; fi;
 - composer install --no-interaction --prefer-dist
@@ -24,7 +24,7 @@ script:
 
 after_success:
 - travis_retry php vendor/bin/coveralls -v
-- bash deploy.sh # gets rid of dev dependencies, so put last
+- bash build/deploy.sh # gets rid of dev dependencies, so put last
 
 notifications:
     email: false

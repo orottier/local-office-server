@@ -1,12 +1,13 @@
 KEEP_RELEASES=5
 BASE=/var/www/kantoortuin
 RELEASES="$BASE"/releases
+
+cd "$BASE"
 mkdir -p $RELEASES
 
 NOW=$(date +%F_%T)
 mv /tmp/release "$RELEASES"/"$NOW"
 
-cd "$BASE"
 rm -f current
 ln -sv releases/"$NOW" current
 

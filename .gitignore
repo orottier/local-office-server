@@ -1,5 +1,5 @@
 /vendor
-.env
+/.env
 /database/database.sqlite
 /storage
 /node_modules
