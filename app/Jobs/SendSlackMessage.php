@@ -5,7 +5,7 @@ namespace App\Jobs;
 use Log;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7;
-use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Exception\TransferException;
 
 class SendSlackMessage extends Job
 {
@@ -18,9 +18,7 @@ class SendSlackMessage extends Job
 
         if (!$client) {
             $client = new Client([
-                // Base URI is used with relative requests
                 'base_uri' => 'https://hooks.slack.com',
-                // You can set any number of default request options.
                 'timeout'  => 3.0,
             ]);
         }
@@ -38,15 +36,11 @@ class SendSlackMessage extends Job
                     'icon_emoji' => ':ghost:',
                 ],
             ]);
-        } catch (RequestException $e) {
+        } catch (TransferException $e) {
             Log::error(Psr7\str($e->getRequest()));
             if ($e->hasResponse()) {
                 Log::error(Psr7\str($e->getResponse()));
             }
-            return false;
-        } catch (ClientException $e) {
-            Log::error(Psr7\str($e->getRequest()));
-            Log::error(Psr7\str($e->getResponse()));
             return false;
         }
 

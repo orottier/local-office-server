@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use Exception;
+use GuzzleHttp\Exception\TransferException;
 use Log;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7;
@@ -28,7 +28,7 @@ class PlaySonosSong extends QueuedJob
 
         try {
             $response = $this->client->request('GET', '/' . env('SONOS_ROOM') . '/spotify/now/' . $this->song);
-        } catch (Exception $e) {
+        } catch (TransferException $e) {
             Log::error(Psr7\str($e->getRequest()));
             if ($e->hasResponse()) {
                 Log::error(Psr7\str($e->getResponse()));
