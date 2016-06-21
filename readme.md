@@ -19,13 +19,14 @@ It's a next generation sentient machine that enjoys talking to other services an
 
 - Auto check in if your laptop connects to the network
 - Tells you which song is playing
+- Play songs at given times (lunch tune, cocktail tune)
 
 Todo:
 - Plan your cocktail Friday
 - Get notified if the boss enters the office
-- Play songs at given times (lunch tune, cocktail tune)
 - Play a song at given events (boss enters the office)
 - Connect with barcode reader to order supplies from grocery store
+- Show latest news, weather and public transit info on office TV
 
 ## Get started with your dev environment
 
